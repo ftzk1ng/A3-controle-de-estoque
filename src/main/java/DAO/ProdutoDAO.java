@@ -14,6 +14,11 @@ public class ProdutoDAO {
         connection = Conexao.getConnection();
     }
 
+    public static List<Produto> listarTodos() {
+        return List.of();
+    }
+
+
     public void inserir(Produto produto) {
         String sql = "INSERT INTO tb_produtos (nome, preco_unitario, unidade, quantidade_estoque, quantidade_minima, quantidade_maxima, categoria) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
