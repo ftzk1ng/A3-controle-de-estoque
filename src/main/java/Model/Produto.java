@@ -10,7 +10,7 @@ public class Produto {
     private int quantidadeMaxima;
     private String categoria;
 
-    // Getters e Setters
+    //caio fez essa parte
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
