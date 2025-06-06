@@ -34,4 +34,12 @@ public class Produto {
 
     public String getCategoria() { return categoria; }
     public void setCategoria(String categoria) { this.categoria = categoria; }
+
+    public Object getQuantidade() {
+        return null;
+    }
+
+    public Object getPreco() {
+        return null;
+    }
 }
