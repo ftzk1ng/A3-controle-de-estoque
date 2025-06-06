@@ -32,8 +32,9 @@ public class MainFrame extends JFrame {
         produtoTextArea.setEditable(false);
         produtoPanel.add(new JScrollPane(produtoTextArea), BorderLayout.CENTER);
 
+        // ATENÇÃO: aumente o número de linhas do GridLayout!
         JPanel produtoForm = new JPanel();
-        produtoForm.setLayout(new GridLayout(7, 1));
+        produtoForm.setLayout(new GridLayout(13, 1)); // 13 linhas para comportar todos os campos
 
         JTextField nomeField = new JTextField();
         JTextField precoField = new JTextField();
@@ -75,6 +76,31 @@ public class MainFrame extends JFrame {
                 clearProdutoFields(nomeField, precoField, unidadeField, quantidadeEstoqueField, quantidadeMinimaField, quantidadeMaximaField, categoriaField);
             }
         });
+
+        // CAMPOS PARA REMOVER PRODUTO
+        JTextField idRemoverField = new JTextField();
+        JButton removerButton = new JButton("Remover Produto");
+        removerButton.addActionListener(e -> {
+            try {
+                String idText = idRemoverField.getText().trim();
+                if (idText.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Informe o ID do produto para remover!");
+                    return;
+                }
+                int id = Integer.parseInt(idText);
+                produtoView.removerProduto(id);
+                produtoTextArea.setText(produtoView.listarProdutos());
+                idRemoverField.setText("");
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "ID inválido! Informe um número.");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao remover produto: " + ex.getMessage());
+            }
+        });
+
+        produtoForm.add(new JLabel("ID para remover:"));
+        produtoForm.add(idRemoverField);
+        produtoForm.add(removerButton);
 
         produtoPanel.add(produtoForm, BorderLayout.NORTH);
         produtoPanel.add(cadastrarProdutoButton, BorderLayout.SOUTH);
@@ -139,6 +165,6 @@ public class MainFrame extends JFrame {
         SwingUtilities.invokeLater(() -> {
             MainFrame frame = new MainFrame();
             frame.setVisible(true);
-        });
-    }
+   });
+}
 }

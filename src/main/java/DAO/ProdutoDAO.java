@@ -58,6 +58,14 @@ public class ProdutoDAO {
         return produtos;
 
     }
-
+    public void remover(int id) {
+        String sql = "DELETE FROM tb_produtos WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+}
+    }
 
 }

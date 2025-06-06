@@ -27,4 +27,9 @@ public class ProdutoView {
         }
         return sb.toString();
     }
-}
+
+    public void removerProduto(int id) {
+        produtoDAO.remover(id);
+    }
+    }
+
